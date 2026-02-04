@@ -16,13 +16,8 @@ if st.button("Classify"):
         with st.spinner("Classifying..."):
             result = classify_po(po_description, supplier)
 
-        # The try/except must be indented to stay within the "else" logic
         try:
-            # Check if result is already a dict/list; if not, parse it
-            if isinstance(result, (dict, list)):
-                st.json(result)
-            else:
-                st.json(json.loads(result))
-        except Exception as e:
-            st.error(f"Invalid model response: {e}")
+            st.json(json.loads(result))
+        except Exception:
+            st.error("Invalid model response")
             st.text(result)
